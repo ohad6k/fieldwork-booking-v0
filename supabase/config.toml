@@ -1,0 +1,17 @@
+project_id = "fieldwork-booking"
+
+[api]
+enabled = true
+port = 55510
+
+[db]
+port = 55511
+shadow_port = 55512
+major_version = 17
+
+[db.seed]
+enabled = true
+sql_paths = ["./seed.sql"]
+
+[studio]
+enabled = false

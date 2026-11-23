@@ -1,0 +1,7 @@
+node_modules/
+.next/
+.vercel/
+.viberaven/
+.env*
+supabase/.temp/
+supabase/.branches/

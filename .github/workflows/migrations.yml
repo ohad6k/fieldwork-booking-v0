@@ -1,0 +1,54 @@
+name: Review migrations
+on:
+  pull_request:
+    paths:
+      - "supabase/**"
+      - "scripts/test-db.sh"
+      - ".github/workflows/migrations.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - run: bash scripts/test-db.sh
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    continue-on-error: true
+    env:
+      VIBERAVEN_RACE_LANES: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Check the repository
+        id: repository
+        continue-on-error: true
+        run: npx -y viberaven check
+      - name: Check migration behavior
+        run: |
+          status=0
+          npx -y viberaven race --auto || status=$?
+          case "$status" in
+            0) outcome="Completed. Inspect the tested scope in the log." ;;
+            2) outcome="Incomplete. Read the coverage reason in the log." ;;
+            *) outcome="Review required. Read the finding or error in the log." ;;
+          esac
+          echo "### VibeRaven migration review" >> "$GITHUB_STEP_SUMMARY"
+          echo "Repository review: ${{ steps.repository.outcome }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "Migration review: $outcome (exit $status)" >> "$GITHUB_STEP_SUMMARY"
+          if [ "$status" -ne 0 ]; then echo "::warning::$outcome"; fi
+          exit "$status"

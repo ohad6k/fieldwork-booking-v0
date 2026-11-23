@@ -1,0 +1,88 @@
+{
+  "format": "Fieldwork booking evidence, selected report fields",
+  "historical_workshop": {
+    "source": "Retained workshop reports from 2026-11-23. See booking-proof.md.",
+    "before": {
+      "source": "c-ws-before.json",
+      "source_sha256": "d60e1e1e6b9118b2a86e55c1bf6dba9cced7afffbdc4ae78a64032b770734a9d",
+      "schema_load": "full",
+      "status": "broken",
+      "checks_run": 2,
+      "distinct_findings": 1,
+      "inconclusive": 0,
+      "checks": [
+        {
+          "label": "same person twice",
+          "status": "broken",
+          "tested": 6,
+          "broken": 4
+        },
+        {
+          "label": "two people, one shared row",
+          "status": "broken",
+          "tested": 6,
+          "broken": 4
+        }
+      ],
+      "fix_checks": [
+        {
+          "name": "advisory lock per call",
+          "proven": true,
+          "tested": 6,
+          "sameSerial": true
+        }
+      ]
+    },
+    "locked_capacity_row": {
+      "source": "c-ws-after.json",
+      "source_sha256": "67c5b76aee7dfeb85e780830b35833f5d613341035a01ced54900d11d009ba24",
+      "schema_load": "full",
+      "status": "passed",
+      "checks_run": 2,
+      "distinct_findings": 0,
+      "inconclusive": 0,
+      "checks": [
+        {
+          "label": "same person twice",
+          "status": "holds",
+          "tested": 6,
+          "broken": 0
+        },
+        {
+          "label": "two people, one shared row",
+          "status": "holds",
+          "tested": 6,
+          "broken": 0
+        }
+      ],
+      "fix_checks": []
+    }
+  },
+  "shipped_guard": {
+    "source": "guarded-engine-raw.json",
+    "engine_git_revision": "0d83c4902b6e94abc96b730bb59399d975eb114f",
+    "migration": "20261122222124_workshop_capacity.sql",
+    "migration_sha256": "2549d9367eca669b224d22b71bbde29e72acb7ee75ac86bc454b14304086493e",
+    "source_sha256": "b02b601a2a8191dc39362d39cbedcba964485dccb39633f5957e7d40a9762aff",
+    "schema_load": "full",
+    "status": "passed",
+    "checks_run": 2,
+    "distinct_findings": 0,
+    "inconclusive": 0,
+    "checks": [
+      {
+        "label": "same person twice",
+        "status": "holds",
+        "tested": 6,
+        "broken": 0
+      },
+      {
+        "label": "two people, one shared row",
+        "status": "holds",
+        "tested": 6,
+        "broken": 0
+      }
+    ],
+    "fix_checks": []
+  }
+}
