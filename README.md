@@ -43,9 +43,13 @@ For display, set `STUDIO_LOCALE` and `STUDIO_TIME_ZONE` in [programme.mjs](lib/p
 
 With Docker and Bash, run `bash scripts/test-db.sh` to check last-seat bookings, cancellations and rescheduling. These sequential pgTAP tests exercise the guard in this starter.
 
-Recorded concurrency tests from an unpublished VibeRaven build show two guests taking the last seat in an earlier workshop schema. Fieldwork’s guard held across the tested orders. The public 1.13.0 concurrency check returned **incomplete** on this schema. [Test setup, recording, and results](docs/booking-proof.md)
+The [test guide](docs/booking-proof.md) explains the setup.
 
 Run `npm test` for the schedule and London time-label tests and `npm run build` for the production build. `npm run check` reviews the repository. Migration pull requests also run an advisory concurrency check. [CI workflow](.github/workflows/migrations.yml)
+
+## Check before you launch
+
+Run `npx -y viberaven check` from the repository root. It reads the migrations and code on your machine, needs no account, and lists launch gaps such as RLS, Data API grants and undocumented environment variables. Re-run it after you change the schema or add a table.
 
 ## License
 
