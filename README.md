@@ -1,20 +1,20 @@
 # Fieldwork Workshop Booking
 
-Import this repository into v0 to get an editable studio booking app. In **Preview**, choose **Reserve a seat → Confirm reservation**. Refresh the Preview, open **My tickets**, select the ticket and choose **Cancel reservation → Release seat**. Demo tickets stay in this browser. [Import from GitHub](https://v0.app/docs/git-import) · [Try the standalone Fieldwork demo](https://fieldwork-studio-gallery-w15.vercel.app)
+Import this repository into v0 to get an editable studio booking app. In **Preview**, choose **Reserve → Confirm reservation**. Refresh the Preview, open **My tickets**, select the ticket and choose **Cancel reservation → Release seat**. Demo tickets stay in this browser. [Import from GitHub](https://v0.app/docs/git-import) · [Try the standalone Fieldwork demo](https://fieldwork-studio-gallery-w15.vercel.app)
 
-![Folded forms at Fieldwork Studio, with the paper study and workshop booking action](docs/images/template-preview.png)
+![Fieldwork Studio’s workshop programme with three dated classes and their remaining seats](docs/images/programme-1440.png)
 
 ## Try a first edit
 
-> Feature Relief printing first. Show its materials beside the studio and duration in the hero. Style that line in app/style.css using the existing vanilla CSS. Keep the reservation flow working.
+> Show the materials for each class beneath its description in the programme. Use the catalogue's materials field and style the line for both themes. Keep the Reserve buttons visible on mobile.
 
-In your preview, check that the print study and class title appear together. Reserve a seat and open **My tickets** again. [Catalogue](lib/programme.mjs) · [Stylesheet](app/style.css)
+In your preview, check the materials on the three workshop cards. Reserve a seat and open **My tickets** again. [Catalogue](lib/programme.mjs) · [Programme views](app/studio-programme.jsx) · [Stylesheet](app/style.css)
 
-[Full workshop programme](docs/images/programme-1440.png) · [Reservation screen](docs/images/reserve-1440.png) · [Mobile programme](docs/images/mobile-workshops.png) · [Mobile ticket](docs/images/ticket-390.png)
+[Reservation screen](docs/images/reserve-1440.png) · [Mobile programme](docs/images/mobile-workshops.png) · [Mobile ticket](docs/images/ticket-390.png)
 
 ## Add your classes
 
-Fieldwork lists one upcoming date per workshop and features the first class in the [catalogue](lib/programme.mjs). Add each class there with its materials, demo capacity and `offsetHours`, counted from Saturday at 00:00 UTC. Add its `public/studies/<slug>.webp` image, 96px and 192px WebP copies under `public/studies/thumbs/<slug>-96.webp` and `<slug>-192.webp`, and a matching row in the [seed](supabase/seed.sql) with capacity, sample reservations and `offset_hours`. A null database offset makes a workshop a one-off.
+Fieldwork lists one upcoming date per workshop in chronological order. Add each class to the [catalogue](lib/programme.mjs) with its materials, demo capacity and `offsetHours`, counted from Saturday at 00:00 UTC. Add its `public/studies/<slug>.webp` image and a matching row in the [seed](supabase/seed.sql) with capacity, sample reservations and `offset_hours`. A null database offset makes a workshop a one-off. The [stylesheet](app/style.css) follows the visitor's light or dark preference.
 
 ## Run locally or deploy
 
@@ -33,7 +33,7 @@ Open [localhost:3000](http://localhost:3000). The browser demo needs no environm
 
 1. In your v0 project’s **Settings → Integrations**, choose Supabase and connect your project. In Supabase’s SQL Editor, run the [migration](supabase/migrations/20261122222124_workshop_capacity.sql), then the [seed](supabase/seed.sql). [v0 databases](https://v0.app/docs/databases)
 2. In **Settings → Environment variables**, check for a project URL and a server secret. Fieldwork accepts `SUPABASE_URL` or `NEXT_PUBLIC_SUPABASE_URL` for the URL, and `SUPABASE_SECRET_KEY` or `SUPABASE_SERVICE_ROLE_KEY` for the server key. Supply a missing value there. For local development, set the same values in `.env.local`. [v0 project settings](https://v0.app/docs/projects)
-3. Refresh the v0 Preview after changing its settings. Restart `npm run dev` locally or redeploy if you're working outside the v0 Preview. **Studio bookings** identifies shared availability. Guests manage their tickets in the browser where they booked. The booking endpoint accepts guests without sign-in or built-in rate limits. For a public studio, you can rate-limit requests to `/api/booking` in Vercel Firewall. To enforce a per-person allowance, require sign-in. [Vercel rate limiting](https://vercel.com/docs/vercel-firewall/vercel-waf/rate-limiting) · [Supabase Auth](https://supabase.com/docs/guides/auth)
+3. Refresh the v0 Preview after changing its settings. Restart `npm run dev` locally or redeploy if you're working outside the v0 Preview. Guests share the same workshop availability and manage their tickets in the browser where they booked. The booking endpoint accepts guests without sign-in or built-in rate limits. For a public studio, you can rate-limit requests to `/api/booking` in Vercel Firewall. To enforce a per-person allowance, require sign-in. [Vercel rate limiting](https://vercel.com/docs/vercel-firewall/vercel-waf/rate-limiting) · [Supabase Auth](https://supabase.com/docs/guides/auth)
 
 After a recurring class closes, run [reschedule.sql](supabase/reschedule.sql) to schedule its next date from its stored offset. Past tickets keep their dates. You can automate this step with [Supabase Cron](https://supabase.com/docs/guides/cron).
 
@@ -49,4 +49,4 @@ Run `npm test` for the schedule and London time-label tests and `npm run build` 
 
 ## License
 
-[MIT](LICENSE). Font licenses accompany [Schibsted Grotesk](public/fonts/OFL-Schibsted.txt) and [IBM Plex Mono](public/fonts/OFL-IBM-Plex-Mono.txt).
+[MIT](LICENSE). Geist is distributed under the [SIL Open Font License](public/fonts/OFL-Geist.txt).
