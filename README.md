@@ -2,7 +2,7 @@
 
 Import this repository into v0 to get an editable studio booking app. In **Preview**, choose **Reserve → Confirm reservation**. Refresh the Preview, open **My tickets**, select the ticket and choose **Cancel reservation → Release seat**. Demo tickets stay in this browser. [Import from GitHub](https://v0.app/docs/git-import) · [Try the standalone Fieldwork demo](https://fieldwork-studio-gallery-w15.vercel.app)
 
-![Fieldwork Studio’s workshop programme with three dated classes and their remaining seats](docs/images/programme-1440.png)
+![Fieldwork Studio’s workshop programme with three dated classes and their remaining seats](docs/images/template-preview.png)
 
 ## Try a first edit
 
@@ -10,7 +10,7 @@ Import this repository into v0 to get an editable studio booking app. In **Previ
 
 In your preview, check the materials on the three workshop cards. Reserve a seat and open **My tickets** again. [Catalogue](lib/programme.mjs) · [Programme views](app/studio-programme.jsx) · [Stylesheet](app/style.css)
 
-[Reservation screen](docs/images/reserve-1440.png) · [Mobile programme](docs/images/mobile-workshops.png) · [Mobile ticket](docs/images/ticket-390.png)
+[Desktop programme](docs/images/programme-1440.png) · [Reservation screen](docs/images/reserve-1440.png) · [Mobile programme](docs/images/mobile-workshops.png) · [Mobile ticket](docs/images/ticket-390.png)
 
 ## Add your classes
 
@@ -27,7 +27,7 @@ npm run dev
 
 Open [localhost:3000](http://localhost:3000). The browser demo needs no environment values. The button below deploys a new copy of the original starter outside v0. To deploy your own v0 edits, use your chat’s publishing controls. [v0 deployments](https://v0.app/docs/deployments)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fohad6k%2Ffieldwork-booking-v0&project-name=fieldwork-booking-v0&repository-name=fieldwork-booking-v0)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fohad6k%2Ffieldwork-booking-v0&project-name=fieldwork-booking-v0&repository-name=fieldwork-booking-v0&demo-title=Fieldwork%20Studio&demo-description=Browse%20workshops%2C%20book%20a%20seat%20and%20manage%20your%20ticket.&demo-url=https%3A%2F%2Ffieldwork-studio-gallery-w15.vercel.app&demo-image=https%3A%2F%2Fraw.githubusercontent.com%2Fohad6k%2Ffieldwork-booking-v0%2Fmain%2Fdocs%2Fimages%2Ftemplate-preview.png)
 
 ## Share availability with Supabase
 
